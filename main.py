@@ -17,10 +17,10 @@ class Contact(db.Expando):
 	email = db.EmailProperty(required=True)
 	
 
-class MainHandler(webapp2.RequestHandler)
+class MainHandler(webapp2.RequestHandler):
 	''' Home page handler '''
 	
-    def get(self):
+	def get(self):
 		''' Show home page '''
         # check if valid Google account
 		user = users.get_current_user()

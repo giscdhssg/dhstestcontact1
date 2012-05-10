@@ -60,8 +60,19 @@ class MainHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('index.html')
 		# associate template values with template
 		self.response.out.write(template.render(template_values))
+
+		
+class UpdateHandler(webapp2.RequestHandler):
+	''' Update contact '''
+	def post(self):
+		if self.request.get('update'):
+			updated_name = self.request.get('name')
+			updated_email = self.request.get('email')
+
 		
 # main
+#contact1 = Contact(pid='lim.ahseng', name='LIM AH SENG', email='lim.ahseng@dhs.sg')
+#contact1.put()
 app = webapp2.WSGIApplication([('/', MainHandler)],
                               debug=True)
 

@@ -17,7 +17,7 @@ class Contact(db.Expando):
 	email = db.EmailProperty(required=True)
 	
 
-class MainHandler(webapp2.RequestHandler
+class MainHandler(webapp2.RequestHandler)
 	''' Home page handler '''
 	
     def get(self):
@@ -55,6 +55,11 @@ class MainHandler(webapp2.RequestHandler
 			'url': url,
 			'url_linktext': url_linktext
 		}
+		
+		# create index.html template
+		template = jinja_environment.get_template('index.html')
+		# associate template values with template
+		self.response.out.write(template.render(template_values))
 		
 # main
 app = webapp2.WSGIApplication([('/', MainHandler)],

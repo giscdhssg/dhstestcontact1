@@ -66,14 +66,27 @@ class UpdateHandler(webapp2.RequestHandler):
 	''' Update contact '''
 	def post(self):
 		if self.request.get('update'):
+			# get data from form controls
 			updated_name = self.request.get('name')
 			updated_email = self.request.get('email')
-
+			# get user to update
+			user = users.get_current_user()
+			query = Contact.gql('WHERE pid = :1', user.nickname())
+			result = query.fetch(1)
+			if result:	# user found, update
+				contact = result[0]
+				contact.name = updated_name
+				contact.email = updated_email
+				contact.put()
+			else:		# user not found, error
+				self.response.out.write('Update failed!')
+		# go back to home page	
+		self.redirect('/')
 		
 # main
 #contact1 = Contact(pid='lim.ahseng', name='LIM AH SENG', email='lim.ahseng@dhs.sg')
 #contact1.put()
-app = webapp2.WSGIApplication([('/', MainHandler)],
+app = webapp2.WSGIApplication([('/', MainHandler), ('/update', UpdateHandler)],
                               debug=True)
 
 							  

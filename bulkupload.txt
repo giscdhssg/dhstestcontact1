@@ -1,0 +1,4 @@
+﻿D:\apps\dhssgc>c:\python27\python "c:\program files\google\google_appengine\appcfg.py" update d:\apps\dhssgc
+
+D:\apps\dhssgc>c:\python27\python "c:\program files\google\google_appengine\appcfg.py" upload_data --application=s~dhssgc --kind=Dunmanian --config_file=dunmanian_loader.py --filename=y4data.csv --url=http://dhssgc.appspot.com/_ah/remote_api d:\apps\dhssgc
+

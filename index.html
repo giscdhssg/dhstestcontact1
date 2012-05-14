@@ -5,7 +5,15 @@
 		<title>DHS Contacts</title>
 		<link rel="stylesheet" href="/static/style.css" />
 		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script src="/static/script.js"></script>
+		<script src="/static/prettyComments.js"></script>
+		<script src="/static/date.js"></script>
+		<script src="/static/datePicker.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('textarea').prettyComments();
+				$('.date-pick').datePicker();
+			});
+		</script>
 	</head>
 	<body>
 		<h1>My Contact</h1>
@@ -15,9 +23,14 @@
 				<label for="name">Name:</label>
 				<input id="name" name="name" value="{{ contact.name|escape }}" />
 				<br /><br />
+				<label for="dob">Date of Birth:</label>
+				<input type="date" class="date-pick" id="dob" name="dob" value="{{ contact.dob|escape }}" />
+				<br /><br />				
 				<label for="email">Email:</label>
 				<input id="email" name="email" value="{{ contact.email|escape }}" />		
 				<br /><br />
+				<label for="remark">Remark:</label>
+				<textarea id="remark" name="remark" col="30" row="5">{{ contact.remark|escape }}</textarea>
 				<input type="submit" id="update" name="update" value="Update">
 			</form>
 		{% else %}

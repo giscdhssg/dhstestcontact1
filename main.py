@@ -15,7 +15,7 @@ class Contact(db.Expando):
 	pid = db.StringProperty(required=True)
 	name = db.StringProperty(required=True)
 	email = db.EmailProperty(required=True)
-	
+	remark = db.TextProperty()
 
 class MainHandler(webapp2.RequestHandler):
 	''' Home page handler '''
@@ -69,6 +69,7 @@ class UpdateHandler(webapp2.RequestHandler):
 			# get data from form controls
 			updated_name = self.request.get('name')
 			updated_email = self.request.get('email')
+			updated_remark = self.request.get('remark')
 			# get user to update
 			user = users.get_current_user()
 			query = Contact.gql('WHERE pid = :1', user.nickname())
@@ -77,6 +78,7 @@ class UpdateHandler(webapp2.RequestHandler):
 				contact = result[0]
 				contact.name = updated_name
 				contact.email = updated_email
+				contact.remark = db.Text(updated_remark)
 				contact.put()
 			else:		# user not found, error
 				self.response.out.write('Update failed!')
